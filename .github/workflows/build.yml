@@ -16,12 +16,12 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.x  # Choose the Python version you need
+        python-version: 3.8 # Choose the Python version you need
 
-    - name: Install dependencies
+    - name: Install build dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential git wget unzip python3-distutils
+        sudo apt-get install -y build-essential git wget unzip
 
     - name: Install buildozer
       run: |
@@ -29,12 +29,10 @@ jobs:
 
     - name: Build APK
       run: |
-        cd .github/workflows
-        buildozer -v -o .github/workflows/buildozer.spec android debug
+        buildozer -v -o buildozer.spec android debug
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v2
       with:
         name: app
-        path: ./.github/workflows/bin/*.apk
-  
+        path: ./bin/*.apk
