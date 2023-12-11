@@ -29,10 +29,11 @@ jobs:
 
     - name: Build APK
       run: |
-        buildozer -v -o /buildozer.spec android debug
+        cd .github/workflows
+        buildozer -v -o .github/workflows/buildozer.spec android debug
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v2
       with:
         name: app
-        path: ./bin/*.apk
+        path: ./.github/workflows/bin/*.apk
